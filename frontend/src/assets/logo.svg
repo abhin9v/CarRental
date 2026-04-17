@@ -1,0 +1,27 @@
+<svg width="280" height="70" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Wheel Icon -->
+  <g transform="translate(10, 10)">
+    <!-- Outer tire -->
+    <circle cx="12" cy="12" r="11" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
+    <circle cx="12" cy="12" r="9.5" stroke="#1a1a1a" stroke-width="1" fill="none"/>
+    <!-- Center hub -->
+    <circle cx="12" cy="12" r="2.5" fill="#2563EB"/>
+    <!-- Spokes -->
+    <line x1="12" y1="2" x2="12" y2="4" stroke="#2563EB" stroke-width="1.5"/>
+    <line x1="12" y1="20" x2="12" y2="22" stroke="#2563EB" stroke-width="1.5"/>
+    <line x1="2" y1="12" x2="4" y2="12" stroke="#2563EB" stroke-width="1.5"/>
+    <line x1="20" y1="12" x2="22" y2="12" stroke="#2563EB" stroke-width="1.5"/>
+    <line x1="18" y1="6" x2="19.4" y2="4.6" stroke="#2563EB" stroke-width="1.5"/>
+    <line x1="4.6" y1="19.4" x2="6" y2="18" stroke="#2563EB" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Text: AutoRentX -->
+  <text x="35" y="28" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1a1a1a">
+    AutoRent<tspan fill="#2563EB">X</tspan>
+  </text>
+  
+  <!-- Tagline: DRIVE • RENT • REPEAT -->
+  <text x="35" y="42" font-family="Arial, sans-serif" font-size="8" fill="#999999" letter-spacing="2">
+    DRIVE • RENT • REPEAT
+  </text>
+</svg>
