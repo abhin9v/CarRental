@@ -7,48 +7,43 @@ import ownerRouter from './routes/ownerRoutes.js';
 import bookingRouter from './routes/bookingRoutes.js';
 
 // initialize express app
-const app = express();
+const app = express() 
 
 // connect database
 try {
-  await connectDB();
-  console.log("Database connection successful");
+  await connectDB()
+  console.log("Database connection successful")
 } catch (error) {
-  console.error("Database connection failed:", error.message);
-  process.exit(1);
+  console.error("Database connection failed:", error.message)
+  process.exit(1)
 }
 
-// ✅ FINAL CORS CONFIG (FIXED)
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://car-rental-chi-five.vercel.app"
-];
+// CORS: set CORS_ORIGIN in production to your frontend origin(s), comma-separated (e.g. https://app.vercel.app,https://preview.vercel.app)
+const defaultOrigins = 'http://localhost:5173'
+const allowedOrigins = (process.env.CORS_ORIGIN || defaultOrigins)
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean)
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests like Postman or server-to-server
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error("CORS not allowed: " + origin));
-    }
+const corsOptions = {
+  origin(origin, callback) {
+    if (!origin) return callback(null, true)
+    if (allowedOrigins.includes(origin)) return callback(null, true)
+    callback(null, false)
   },
-  credentials: true
-}));
+  credentials: true,
+  optionsSuccessStatus: 200
+}
 
 // middleware
+app.use(cors(corsOptions));
 app.use(express.json());
 
-// routes
-app.get('/', (req, res) => res.send("server is running"));
+app.get('/',(req,res)=>res.send("server is running"))
+app.use('/api/user',userRouter)
+app.use('/api/owner',ownerRouter)
+app.use('/api/bookings',bookingRouter)
 
-app.use('/api/user', userRouter);
-app.use('/api/owner', ownerRouter);
-app.use('/api/bookings', bookingRouter);
+const PORT = process.env.PORT || 3000
 
-// port
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => console.log(`server running on port ${PORT}`));
+app.listen(PORT,()=>console.log(`server running on port ${PORT}`));
