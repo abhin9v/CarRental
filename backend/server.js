@@ -7,20 +7,48 @@ import ownerRouter from './routes/ownerRoutes.js';
 import bookingRouter from './routes/bookingRoutes.js';
 
 // initialize express app
-const app = express() 
+const app = express();
 
 // connect database
-await connectDB()
+try {
+  await connectDB();
+  console.log("Database connection successful");
+} catch (error) {
+  console.error("Database connection failed:", error.message);
+  process.exit(1);
+}
+
+// ✅ FINAL CORS CONFIG (FIXED)
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://car-rental-three-inky.vercel.app"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // allow requests like Postman or server-to-server
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("CORS not allowed: " + origin));
+    }
+  },
+  credentials: true
+}));
 
 // middleware
-app.use(cors());
 app.use(express.json());
 
-app.get('/',(req,res)=>res.send("server is running"))
-app.use('/api/user',userRouter)
-app.use('/api/owner',ownerRouter)
-app.use('/api/bookings',bookingRouter)
+// routes
+app.get('/', (req, res) => res.send("server is running"));
 
-const PORT = process.env.PORT || 3000
+app.use('/api/user', userRouter);
+app.use('/api/owner', ownerRouter);
+app.use('/api/bookings', bookingRouter);
 
-app.listen(PORT,()=>console.log(`server running on port ${PORT}`));
+// port
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`server running on port ${PORT}`));
