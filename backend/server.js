@@ -21,7 +21,7 @@ try {
 // ✅ FINAL CORS CONFIG (FIXED)
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://car-rental-three-inky.vercel.app"
+  "https://car-rental-chi-five.vercel.app"
 ];
 
 app.use(cors({
