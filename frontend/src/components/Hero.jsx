@@ -25,7 +25,7 @@ const Hero = () => {
       <motion.h1 initial={{y:50,opacity:0}}
           animate={{y:0,opacity:1}}
           transition={{duration:0.8,delay:0.2}}
-       className='text-4xl md:text-5xl font-semibold'>Luxury cars on Rent
+       className='text-4xl md:text-5xl font-semibold bg-red-500 text-white px-4 py-2 rounded-lg'>
        </motion.h1>
 
       <motion.form 
