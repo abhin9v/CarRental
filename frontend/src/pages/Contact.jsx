@@ -5,6 +5,12 @@ import styles from './Contact.module.css';
 
 const PROFILES = [
   {
+    icon: '🌐',
+    label: 'Portfolio',
+    sub: 'Abhinav Singh',
+    href: 'https://portfolio-frws.onrender.com/',
+  },
+  {
     icon: '🐙',
     label: 'GitHub',
     sub: 'github.com/abhin9v',
